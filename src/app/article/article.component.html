@@ -8,8 +8,14 @@
             class="max-w-full h-auto">
         <figcaption class="italic text-center">{{article.imageCaption}}</figcaption>
     </figure>
-    <p class="text-justify my-3">
+    <p *ngIf="!isDetail" class="text-justify my-3">
         {{article.content}}
+    </p>
+    <p *ngIf="isDetail" class="text-justify my-3">
+        {{article.content}}
+    </p>
+    <p class="py-2">
+        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" (click)="detail(article.id)">Read More</button>
     </p>
     <footer class="italic uppercase">
         <p>Author: {{article.author}}, Published: {{article.publishDate}}</p>
