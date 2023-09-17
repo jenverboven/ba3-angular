@@ -1,3 +1,15 @@
 <h1>Welcome home</h1>
-<app-article *ngFor="let article of articles" [article]="article"></app-article>
+
+<!-- <ng-container *ngIf="articles.length > 0; else noArticles">
+    <app-article *ngFor="let article of articles" [article]="article"></app-article>
+</ng-container> -->
+<ng-container *ngIf="articles.length > 0;">
+    <app-article *ngFor="let article of articles" [article]="article"></app-article>
+</ng-container>
+
+<!-- <ng-template #noArticles>
+    <p>No articles found</p>
+</ng-template> -->
+
+<p *ngIf="articles.length == 0;">No articles found</p>
 <!-- <p>This is the homepage of our news app!</p> -->

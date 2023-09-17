@@ -23,7 +23,7 @@ export class ArticleService {
       dolores? Cum tempore, mollitia provident placeat fugit earum, sint, quae iusto optio ea officiis consectetur sit
       necessitatibus itaque explicabo?`,
       author: "Michaël Cloots",
-      publishDate: "28/11/2020"
+      publishDate: "26/9/2023"
     };
 
     let article2: Article = {
@@ -37,12 +37,71 @@ export class ArticleService {
       dolores? Cum tempore, mollitia provident placeat fugit earum, sint, quae iusto optio ea officiis consectetur sit
       necessitatibus itaque explicabo?`,
       author: "Florian Smeyers",
-      publishDate: "30/11/2020"
+      publishDate: "5/9/2023"
     };
 
     articles.push(article1);
     articles.push(article2);
 
+
+    //nooit een array aanpassen in een foreach loop want daardoor verandert de lengte van de array tijdens de foreach operatie en vormt problemen / foreach wordt te vaak of te weinig uitgevoerd
+
+    // articles.forEach((el, index) => {
+    //   if (!this.isPublishDateWithinOneWeek(el.publishDate)){
+    //     articles.splice(index, 1);
+    //   }
+    // });
+
+    for (let i = articles.length - 1; i >= 0; i--){
+      if (!this.isPublishDateWithinOneWeek(articles[i].publishDate)) {
+        articles.splice(i, 1);
+      }
+    }
+
+    console.log(articles);
+
     return articles;
+  }
+
+  isPublishDateWithinOneWeek(dateString: string): boolean {
+
+    // //parse date string into date
+    // const publishDate = new Date(dateString);
+
+    //get individual parts of the date
+    const dateParts = dateString.split('/');
+
+    //convert array of date parts into ints usable to construct a date later
+    const day = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10) - 1; // Subtract 1 to make it 0-based
+    const year = parseInt(dateParts[2], 10);
+
+    //construct the date object based on split string
+    const publishDate = new Date(year, month, day);
+
+    //get the current date
+    const currentDate = new Date();
+
+    //calculate date one week earlier
+    const oneWeekEarlier = new Date();
+    oneWeekEarlier.setDate(currentDate.getDate() - 7);
+
+    //calculate date one week later
+    const oneWeekLater = new Date();
+    oneWeekLater.setDate(currentDate.getDate() + 7);
+
+    console.log(dateParts);
+    console.log(currentDate);
+    console.log(publishDate);
+    console.log(oneWeekEarlier);
+    console.log(oneWeekLater);
+    // console.log(day);
+    // console.log(month);
+    // console.log(year);
+
+    //compare publish date with the current date
+    return(
+      publishDate >= oneWeekEarlier && publishDate <= oneWeekLater
+    );
   }
 }
