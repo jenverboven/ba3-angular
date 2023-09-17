@@ -1,15 +1,17 @@
-<article *ngIf="article">
-    <h1>{{article.title}}</h1>
-    <h4>{{article.subtitle}}</h4>
-    <figure>
+<article *ngIf="article"
+    class="flex flex-col justify-between h-full bg-white border-gray-200 border-2 p-6 shadow">
+    <h1 class="text-4xl my-3">{{article.title}}</h1>
+    <h4 class="text-xl my-3">{{article.subtitle}}</h4>
+    <figure class="self-center my-3">
         <img src="{{article.imageUrl}}"
-            alt="{{article.imageCaption}}">
-        <figcaption>{{article.imageCaption}}</figcaption>
+            alt="{{article.imageCaption}}"
+            class="max-w-full h-auto">
+        <figcaption class="italic text-center">{{article.imageCaption}}</figcaption>
     </figure>
-    <p>
+    <p class="text-justify my-3">
         {{article.content}}
     </p>
-    <footer>
+    <footer class="italic uppercase">
         <p>Author: {{article.author}}, Published: {{article.publishDate}}</p>
     </footer>
 </article>
