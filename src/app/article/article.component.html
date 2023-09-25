@@ -9,7 +9,7 @@
         <figcaption class="italic text-center">{{article.imageCaption}}</figcaption>
     </figure>
     <p *ngIf="!isDetail" class="text-justify my-3">
-        {{article.content}}
+        {{article.content | shortenContent : 250 }}
     </p>
     <p *ngIf="isDetail" class="text-justify my-3">
         {{article.content}}
